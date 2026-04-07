@@ -1,8 +1,8 @@
 networks:
-  iternal:
-    name: iternal
-  exposed:
-    name: exposed
+  iternal-vkr:
+    name: iternal-vkr
+  exposed-vkr:
+    name: exposed-vkr
 services:
   jvm:
     build: ./jvm
@@ -10,8 +10,8 @@ services:
       - ./jvm/dist:/opt/application
       - ./jvm/home:/home
     networks:
-      - iternal
-      - exposed
+      - iternal-vkr
+      - exposed-vkr
     depends_on:
       - postgres
     deploy:
@@ -29,7 +29,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/home:/home
     networks:
-      - exposed
+      - exposed-vkr
     depends_on:
       - jvm
     entrypoint: /bin/bash /home/startup.sh
@@ -43,7 +43,7 @@ services:
       - ./postgres/root:/root
       - ./postgres/init.d:/docker-entrypoint-initdb.d
     networks:
-      - iternal
+      - iternal-vkr
     ports:
       - "9052:5432"
     deploy:
