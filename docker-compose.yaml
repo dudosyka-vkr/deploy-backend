@@ -22,7 +22,7 @@ services:
     restart: always
     entrypoint: /bin/bash /home/startup.sh
   nginx:
-    build: ./nginx
+    image: nginx
     ports:
       - "9051:80"
     volumes:
